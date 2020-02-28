@@ -131,3 +131,4 @@ dmypy.json
 # PyDNS specific files
 config.ini
 logs/
+zones/

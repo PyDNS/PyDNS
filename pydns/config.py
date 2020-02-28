@@ -1,6 +1,6 @@
 from configparser import ConfigParser
 import os
-from pydns import resource
+from pydns.utils import resources
 
 config = None
 
@@ -20,7 +20,7 @@ class Config:
 
     def __init__(self, fileName="config.ini"):
         self.config = ConfigParser()
-        self.fileName = os.path.join(resource.getWriteableResourcePath(), fileName)
+        self.fileName = os.path.join(resources.getWriteableResourcePath(), fileName)
         self.config.read(self.fileName)
 
         if not os.path.isfile(self.fileName):
@@ -67,3 +67,18 @@ class Config:
 
     def getBool(self, section, option):
         return bool(self.get(section, option))
+
+
+def getString(section, option):
+    global config
+    return config.getString(section, option)
+
+
+def getInt(section, option):
+    global config
+    return config.getInt(section, option)
+
+
+def getBool(section, option):
+    global config
+    return config.getInt(section, option)

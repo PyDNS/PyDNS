@@ -1,0 +1,20 @@
+{
+    "domain": "xd.ms.",
+    "ttl": 3600,
+    "soa": {
+        "mname": "ns1.private-dns.zone.",
+        "rname": "nos.cosmicdns.net.",
+        "serial": "{time}",
+        "refresh": 3600,
+        "retry": 600,
+        "expire": 604800,
+        "minimum": 86400
+    },
+    "ns": [
+        { "host": "ns1.private-dns.zone." },
+        { "host": "ns2.private-dns.zone." }
+    ],
+    "a": [
+        { "name": "@", "ttl": 400, "value": "127.0.0.1" }
+    ]
+}

@@ -1,10 +1,10 @@
 import os
-from pydns import resource
+from . import resources
 import logging
 from logging import handlers
 import colorlog
 
-LOG_DIR = os.path.join(resource.getWriteableResourcePath(), "logs")
+LOG_DIR = os.path.join(resources.getWriteableResourcePath(), "logs")
 LOG_FILE = os.path.join(LOG_DIR, 'pydns.log')
 
 

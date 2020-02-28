@@ -1,3 +1,2 @@
-from .server import Server
+def buildResponse(data):
 
-server = Server()

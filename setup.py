@@ -2,7 +2,7 @@ import sys
 from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"excludes": ["tkinter"]}
+build_exe_options = {"excludes": ["tkinter"], "packages": ["sqlalchemy", "inflect"]}
 
 
 # GUI applications require a different base on Windows (the default is for a
