@@ -3,6 +3,7 @@ from . import Model
 
 
 class Zone(Model):
-    id = Column(Integer, primary_key=True)
-    domain = Column(String(255))
+    # id is the uuid of the record
+    id = Column(String(36), primary_key=True, unique=True)
+    domain = Column(String(255), unique=True)
     active = Column(Boolean(True))

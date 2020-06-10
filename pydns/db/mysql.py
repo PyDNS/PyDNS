@@ -37,3 +37,8 @@ class MySql(Backend):
             return result
         else:
             return None
+
+    def getZone(self, domain):
+        results = self.query("SELECT * FROM `zones` WHERE `domain`=" + domain)
+        if results is not None:
+            print(results)
