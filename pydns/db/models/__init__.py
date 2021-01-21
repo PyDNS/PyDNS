@@ -1,18 +1,9 @@
-from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.ext.declarative import declarative_base
-import inflect
+from sqlalchemy.orm import configure_mappers
 
+# import all models here
+from .zone import *
+from .record import *
 
-class Base(object):
-
-    @declared_attr
-    def __tablename__(cls):
-        pluralizer = inflect.engine()
-        return pluralizer.plural(cls.__name__.lower())
-
-
-Base = declarative_base(cls=Base)
-
-
-class Model(Base):
-    pass
+# run configure_mappers after defining all of the models to ensure
+# all relationships can be setup
+configure_mappers()

@@ -1,7 +1,7 @@
 from pydns import config
 from sqlalchemy import create_engine
 from . import Backend
-
+from pydns.db.models import Zone
 
 class MySql(Backend):
 
@@ -39,6 +39,6 @@ class MySql(Backend):
             return None
 
     def getZone(self, domain):
-        results = self.query("SELECT * FROM `zones` WHERE `domain`=" + domain)
+        zone = Zone(domain=)
         if results is not None:
             print(results)
