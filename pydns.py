@@ -12,6 +12,8 @@ def main():
     parser.version = resources.getVersion()
     parser.add_argument('-c', '--config', type=str, help='Specify the path to the config file', required=False)
     parser.add_argument('-v', '--version', action='version', help='Shows the version of PyDNS you are running')
+    parser.add_argument('-d', '--daemon', type=bool, help='Start server in background as a daemon', required=False,
+                        default=False)
 
     # Parse the arguments
     args = parser.parse_args()
@@ -37,6 +39,11 @@ def main():
         sys.exit()
 
     server = Server(port=port)
+
+    if args.daemon:
+        server.start()
+    else:
+        server.foreground()
 
 
 if __name__ == "__main__":

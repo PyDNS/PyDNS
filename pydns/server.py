@@ -3,11 +3,13 @@ from pydns.utils.log import logger
 from pydns import config
 from pydns.db.filebackend import FileBackend
 from pydns.db.mysql import MySql
+from pydns.utils.daemon import Daemon
 
 
-class Server:
+class Server(Daemon):
 
-    def __init__(self, port=53, ip='127.0.0.1'):
+    def __init__(self, port=53, ip='127.0.0.1', pidfile='/var/run/pydns.pid'):
+        super().__init__(pidfile)
         self.port = port
         self.ip = ip
 
@@ -25,6 +27,7 @@ class Server:
 
         logger.info("Server started on port " + str(self.port))
 
+    def run(self):
         while 1:
             self.data, self.addr = self.sock.recvfrom(512)
             resp = self.buildResponse(data=self.data)
