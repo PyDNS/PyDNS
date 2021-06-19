@@ -2,6 +2,7 @@ import socket
 from pydns.utils.log import logger
 from pydns import config
 from pydns.db.filebackend import FileBackend
+from pydns.db.mysql import MySql
 
 
 class Server:
@@ -12,6 +13,11 @@ class Server:
 
         if config.getString('database', 'backend') == 'file':
             self.backend = FileBackend()
+        if config.getString('database', 'backend') == 'mysql':
+            self.backend = MySql()
+
+            logger.info("Initializing Database...")
+            self.backend.createTables()
 
         # Initialize udp ipv4 socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -48,7 +54,7 @@ class Server:
         # Additional Count
         ARCOUNT = (0).to_bytes(2, byteorder='big')
 
-        header = TransactionID+Flags+QDCOUNT+ANCOUNT+NSCOUNT+ARCOUNT
+        header = TransactionID + Flags + QDCOUNT + ANCOUNT + NSCOUNT + ARCOUNT
         body = b''
 
         records, rectype, domain = self.getRecords(data[12:])
@@ -102,7 +108,8 @@ class Server:
         # Our Response Code
         RCODE = '0000'
 
-        return int(QR+OPCODE+AA+TC+RD, 2).to_bytes(1, byteorder='big') + int(RA + Z + RCODE, 2).to_bytes(1, byteorder='big')
+        return int(QR + OPCODE + AA + TC + RD, 2).to_bytes(1, byteorder='big') + int(RA + Z + RCODE, 2).to_bytes(1,
+                                                                                                                 byteorder='big')
 
     def getDomain(self, data):
         state = 0
@@ -130,7 +137,7 @@ class Server:
                 expectedlength = byte
             y += 1
 
-        questiontype = data[y:y+2]
+        questiontype = data[y:y + 2]
 
         return parts, questiontype
 

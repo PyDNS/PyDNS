@@ -12,7 +12,3 @@ class Base(object):
 
 
 Base = declarative_base(cls=Base)
-
-
-class Model(Base):
-    pass

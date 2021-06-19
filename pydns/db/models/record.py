@@ -1,9 +1,9 @@
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
-from .meta import Model
+from .meta import Base
 
 
-class Record(Model):
+class Record(Base):
     # id is the uuid of the record
     id = Column(String(36), primary_key=True, unique=True)
     zone_id = Column(String(36), ForeignKey("zones.id"))

@@ -16,5 +16,8 @@ class Backend:
     def createTables(self):
         pass
 
+    def commit(self):
+        pass
+
     def query(self, sql):
         pass
